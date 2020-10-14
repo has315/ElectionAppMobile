@@ -1,5 +1,5 @@
-import React from 'react'
-import {View, Text, StyleSheet} from 'react-native'
+import React from 'react';
+import {View, Text, StyleSheet} from 'react-native';
 
 const Header = ({title}) => {
   return (
@@ -7,7 +7,7 @@ const Header = ({title}) => {
       <Text style={styles.text}>{title}</Text>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   header: {
@@ -15,12 +15,11 @@ const styles = StyleSheet.create({
     width: 250,
     padding: 15,
     backgroundColor: 'black',
+  },
+  text: {
+    color: 'white',
+    textAlign: 'center',
+  },
+});
 
-},
-  text:{
-      color:'white',
-      textAlign: 'center'
-},
-})
-
-export default Header
+export default Header;
