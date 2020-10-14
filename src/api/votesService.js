@@ -1,4 +1,5 @@
 import axios from 'axios';
+import StatusCodes from 'http-status-codes';
 // import {method} from '../utils/method';
 const method = {
   POST: 'POST',
@@ -29,18 +30,26 @@ async function sendRequst(m, endpoint, data, config) {
         return response.data;
     }
   } catch (error) {
-    console.error(error);
+    return error.response;
   }
 }
 
 const getVotes = async (m, endpoint, data, config) => {
   let response = await sendRequst(m, endpoint, data, config);
-  return response;
+  if (response && StatusCodes.OK === response.status && token in response) {
+    return response.token;
+  } else {
+    return [];
+  }
 };
 
 const searchVotes = async (m, endpoint, data, config) => {
   let response = await sendRequst(m, endpoint, data, config);
-  return response;
+  if (response && StatusCodes.OK === response.status && token in response) {
+    return response.token;
+  } else {
+    return [];
+  }
 };
 
 let token =
