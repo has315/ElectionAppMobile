@@ -1,18 +1,34 @@
 import {StyleSheet} from 'react-native';
+import colors from './BaseStyle';
 
 const style = StyleSheet.create({
   container: {
-    flex: 1,
-    flexDirection: 'column',
+    flexDirection: 'row',
     justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'blue',
+    alignContent: 'center',
+    backgroundColor: colors.primary,
+    borderRadius: 15,
+    elevation: 10,
+    paddingHorizontal: 3,
   },
 
-  column: {
+  textInput: {
     flex: 1,
+    fontSize: 18,
+  },
+
+  searchIcon: {
+    color: colors.secondary,
+  },
+
+  centerContent: {
     justifyContent: 'center',
-    alignItems: 'center',
+  },
+
+  border: {
+    borderWidth: 4,
+    borderColor: colors.accent,
+    borderRadius: 5,
   },
 });
 
