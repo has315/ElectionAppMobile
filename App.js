@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import {View, Text, StyleSheet} from 'react-native';
-import SearchBar from './src/components/SearchBar';
 import HomePage from './src/containers/HomePage';
 
 const App = () => {
