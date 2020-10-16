@@ -469,7 +469,7 @@ const data = [
   },
 ];
 
-const HomePage = () => {
+const HomePage = ({navigation}) => {
   const [votes, setVotes] = useState([]);
 
   useEffect(() => {
