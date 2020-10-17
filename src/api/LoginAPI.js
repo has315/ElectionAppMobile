@@ -2,6 +2,7 @@ import axios from 'axios';
 import StatusCodes from 'http-status-codes';
 import Config from 'react-native-config';
 // import {method} from '../utils/method';
+import hashValue from '../services/loginService'
 
 const method = {
   POST: 'POST',
@@ -10,7 +11,6 @@ const method = {
   DELETE: 'DELETE',
   PATCH: 'PATCH',
 };
-
 async function sendRequst(m, endpoint, data, config) {
   try {
     let response = null;
@@ -39,8 +39,10 @@ async function sendRequst(m, endpoint, data, config) {
 
 const login = async (data, config) => {
   let token = 'token';
+  const hashedValue = hashValue(data);
+  console.log('Val is: ', hashedValue);
   const endpoint = `${Config.BASE_URL}/users/login`;
-  let response = await sendRequst(method.POST, endpoint, data, config);
+  let response = await sendRequst(method.POST, endpoint, hashedValue, config);
   if (response && StatusCodes.OK === response.status && token in response) {
     return response.token;
   } else {
@@ -60,7 +62,9 @@ login(data, config).then((response) =>
   console.log(`Response: ${JSON.stringify(response)}`),
 );
 
+
+
 // response = logout(method.POST, endpoint, data, config);
 // console.log(`Response: ${response}`);
 
-export default {login};
+export default login;

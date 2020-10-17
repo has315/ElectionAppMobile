@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import style from '../styles/LoginPageStyle.js';
+import login from '../api/LoginAPI'
 
 const LoginPage = ({navigation}) => {
   const [username, setUsername] = useState('');
@@ -16,9 +17,13 @@ const LoginPage = ({navigation}) => {
 
   const changeUsername = (value) => setUsername(value);
   const changePassword = (value) => setPassword(value);
+  
 
-  const login = () => {
+  const loginUser = () => {
+    let data = {username: '', password: password}
+    console.log('data from data: ' + data);
     //TODO: call LoginService nad process username  & password
+    login(data)
     navigation.navigate('Home');
   };
 
@@ -49,7 +54,7 @@ const LoginPage = ({navigation}) => {
       </View>
       <Icon.Button
         name="sign-in"
-        onPress={login}
+        onPress={loginUser}
         style={style.buttonCenterContent}>
         <Text style={style.buttonText}>Prijavi se</Text>
       </Icon.Button>
