@@ -5,7 +5,6 @@ import SearchBar from '../components/SearchBar';
 import VotesContainer from '../containers/VotesContainer';
 import data from '../utils/data';
 
-
 const HomePage = ({navigation}) => {
   const [votes, setVotes] = useState([]);
 
