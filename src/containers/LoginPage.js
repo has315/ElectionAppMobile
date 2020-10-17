@@ -37,6 +37,7 @@ const LoginPage = ({navigation}) => {
           value={password}
           placeholder="*****"
           onChangeText={changePassword}
+          secureTextEntry
         />
       </View>
       <Button title="Prijavi se" onPress={login} />
