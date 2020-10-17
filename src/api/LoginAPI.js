@@ -35,9 +35,9 @@ async function sendRequst(m, endpoint, data, config) {
   }
 }
 
-const login = async (m, endpoint, data, config) => {
+const login = async (endpoint, data, config) => {
   let token = 'token';
-  let response = await sendRequst(m, endpoint, data, config);
+  let response = await sendRequst(method.POST, endpoint, data, config);
   if (response && StatusCodes.OK === response.status && token in response) {
     return response.token;
   } else {

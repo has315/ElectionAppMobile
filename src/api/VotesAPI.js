@@ -34,8 +34,8 @@ async function sendRequst(m, endpoint, data, config) {
   }
 }
 
-const getVotes = async (m, endpoint, data, config) => {
-  let response = await sendRequst(m, endpoint, data, config);
+const getVotes = async (endpoint, data, config) => {
+  let response = await sendRequst(endpoint, data, config);
   if (response && StatusCodes.OK === response.status && token in response) {
     return response.token;
   } else {
@@ -43,8 +43,8 @@ const getVotes = async (m, endpoint, data, config) => {
   }
 };
 
-const searchVotes = async (m, endpoint, data, config) => {
-  let response = await sendRequst(m, endpoint, data, config);
+const searchVotes = async (endpoint, data, config) => {
+  let response = await sendRequst(method.GET, endpoint, data, config);
   if (response && StatusCodes.OK === response.status && token in response) {
     return response.token;
   } else {
