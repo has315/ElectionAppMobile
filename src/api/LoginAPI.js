@@ -1,6 +1,8 @@
 import axios from 'axios';
 import StatusCodes from 'http-status-codes';
+import Config from 'react-native-config';
 // import {method} from '../utils/method';
+
 const method = {
   POST: 'POST',
   GET: 'GET',
@@ -35,8 +37,9 @@ async function sendRequst(m, endpoint, data, config) {
   }
 }
 
-const login = async (endpoint, data, config) => {
+const login = async (data, config) => {
   let token = 'token';
+  const endpoint = `${Config.BASE_URL}/users/login`;
   let response = await sendRequst(method.POST, endpoint, data, config);
   if (response && StatusCodes.OK === response.status && token in response) {
     return response.token;
@@ -53,7 +56,7 @@ let data = {
 let config = {};
 let endpoint = 'http://157.230.105.18:3000/users/login';
 
-login(method.POST, endpoint, data, config).then((response) =>
+login(data, config).then((response) =>
   console.log(`Response: ${JSON.stringify(response)}`),
 );
 
