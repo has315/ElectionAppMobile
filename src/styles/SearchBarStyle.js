@@ -6,6 +6,7 @@ const style = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignContent: 'center',
+    marginTop: 10,
     backgroundColor: colors.primary,
     borderRadius: 15,
     elevation: 10,
