@@ -1,5 +1,12 @@
 import React, {useState} from 'react';
-import {View, TextInput, Image, Button, ImageComponent} from 'react-native';
+import {
+  View,
+  Text,
+  TextInput,
+  Image,
+  Button,
+  ImageComponent,
+} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import style from '../styles/LoginPageStyle.js';
 
@@ -40,7 +47,12 @@ const LoginPage = ({navigation}) => {
           secureTextEntry
         />
       </View>
-      <Button title="Prijavi se" onPress={login} />
+      <Icon.Button
+        name="sign-in"
+        onPress={login}
+        style={style.buttonCenterContent}>
+        <Text style={style.buttonText}>Prijavi se</Text>
+      </Icon.Button>
     </View>
   );
 };

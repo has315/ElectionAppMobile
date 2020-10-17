@@ -1,4 +1,5 @@
 import {StyleSheet} from 'react-native';
+import {color} from 'react-native-reanimated';
 import colors from './BaseStyle';
 
 const style = StyleSheet.create({
@@ -24,6 +25,17 @@ const style = StyleSheet.create({
     minWidth: 20,
     marginRight: 5,
     color: colors.secondary,
+  },
+
+  buttonText: {
+    fontSize: 20,
+    color: colors.primary,
+    alignSelf: 'center',
+  },
+
+  buttonCenterContent: {
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 
   borderRed: {
