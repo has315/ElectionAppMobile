@@ -7,11 +7,6 @@ import {NavigationContainer} from '@react-navigation/native';
 const App = () => {
   return (
     <NavigationContainer>
-      {/* <View style={styles.container}>
-        <Text>Above HOME</Text>
-        <HomePage />
-        <Text>Below HOME</Text>
-      </View> */}
       <Navigator />
     </NavigationContainer>
   );
