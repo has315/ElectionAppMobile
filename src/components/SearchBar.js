@@ -1,6 +1,6 @@
-import React, {useEffect, useReducer, useState} from 'react';
-import {View, TextInput, Text} from 'react-native';
-import {Picker} from '@react-native-community/picker';
+import React, {useContext, useState} from 'react';
+import {View, TextInput} from 'react-native';
+import VotesContext from '../context/VotesContext';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 import style from '../styles/SearchBarStyle';
@@ -20,6 +20,7 @@ const searchKeys = {
 };
 
 const SearchBar = () => {
+  const {setVotes} = useContext(VotesContext);
   const [searchPhrase, setSearchPhrase] = useState('');
   const [selectedKey, setSelectedKey] = useState(Object.keys(searchKeys)[0]);
 
@@ -36,10 +37,10 @@ const SearchBar = () => {
     };
 
     VotesAPI.searchVotes({}, config)
-      .then((data) =>
-        // TODO: Assign data.response to votes from HomePage
-        console.log(data.response.length),
-      )
+      .then((data) => {
+        console.log(data.response.length);
+        setVotes(data.response);
+      })
       .catch((err) => console.error(err));
   };
 

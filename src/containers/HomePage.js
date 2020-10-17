@@ -3,6 +3,7 @@ import {View} from 'react-native';
 import style from '../styles/HomePageStyle';
 import SearchBar from '../components/SearchBar';
 import VotesContainer from '../containers/VotesContainer';
+import VotesContext from '../context/VotesContext';
 import data from '../utils/data';
 
 const HomePage = ({navigation}) => {
@@ -10,12 +11,14 @@ const HomePage = ({navigation}) => {
 
   useEffect(() => {
     setVotes(data);
-  }, [votes]);
+  }, []);
 
   return (
     <View style={style.container}>
-      <SearchBar />
-      <VotesContainer votes={votes} />
+      <VotesContext.Provider value={{votes, setVotes}}>
+        <SearchBar />
+        <VotesContainer />
+      </VotesContext.Provider>
     </View>
   );
 };

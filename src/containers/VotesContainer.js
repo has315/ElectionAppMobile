@@ -1,9 +1,11 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {View, Text, FlatList} from 'react-native';
 import VoteCard from '../components/VoteCard';
+import VotesContext from '../context/VotesContext';
 import style from '../styles/VotesContainerStyle';
 
-const VotesContainer = ({votes}) => {
+const VotesContainer = () => {
+  const {votes} = useContext(VotesContext);
   const renderVoteCard = ({item}) => {
     return <VoteCard vote={item} />;
   };
