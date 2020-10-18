@@ -6,18 +6,26 @@ const style = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'column',
-    alignContent: 'center',
-    justifyContent: 'center',
     backgroundColor: colors.primary,
+    padding: 10,
   },
 
   imageContainer: {
     flexDirection: 'row',
+    marginTop: 40,
+    marginBottom: 50,
+    padding: 10,
   },
 
-  imageStyle: {
-    width: '100%',
-    height: undefined,
+  imageStyle: {flex: 1, aspectRatio: 1.5, resizeMode: 'contain'},
+
+  alignSelfCenter: {
+    alignSelf: 'center',
+  },
+  inputContainer: {
+    padding: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 
   iconStyle: {
@@ -25,6 +33,16 @@ const style = StyleSheet.create({
     minWidth: 20,
     marginRight: 5,
     color: colors.secondary,
+    alignSelf: 'center',
+  },
+
+  textInputStyle: {
+    borderBottomWidth: 2,
+    borderColor: colors.secondary,
+    marginBottom: 10,
+    minWidth: 200,
+    alignSelf: 'stretch',
+    padding: 5,
   },
 
   buttonText: {
@@ -33,7 +51,11 @@ const style = StyleSheet.create({
     alignSelf: 'center',
   },
 
-  buttonCenterContent: {
+  center: {
+    justifyContent: 'center',
+  },
+
+  buttonStyle: {
     justifyContent: 'center',
     alignItems: 'center',
   },

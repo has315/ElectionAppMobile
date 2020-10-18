@@ -1,5 +1,12 @@
 import React, {useState} from 'react';
-import {View, Text, TextInput, Image} from 'react-native';
+import {
+  KeyboardAvoidingView,
+  View,
+  Platform,
+  Text,
+  TextInput,
+  Image,
+} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import style from '../styles/LoginPageStyle.js';
 import LoginAPI from '../api/LoginAPI';
@@ -20,37 +27,42 @@ const LoginPage = ({navigation}) => {
   };
 
   return (
-    <View style={style.container}>
+    <KeyboardAvoidingView
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : 20}
+      enabled={Platform.OS === 'ios'}
+      style={style.container}>
       <View style={style.imageContainer}>
         <Image
           style={style.imageStyle}
           source={require('../assets/sps_logo.png')}
         />
       </View>
-      <View style={{...style.row, ...style.borderRed}}>
-        <Icon style={style.iconStyle} name="user" />
-        <TextInput
-          value={username}
-          placeholder="Korisičko ime"
-          onChangeText={changeUsername}
-        />
+      <View style={style.inputContainer}>
+        <View style={{...style.row}}>
+          <Icon style={style.iconStyle} name="user" />
+          <TextInput
+            style={style.textInputStyle}
+            value={username}
+            placeholder="Korisičko ime"
+            onChangeText={changeUsername}
+          />
+        </View>
+        <View style={{...style.row}}>
+          <Icon style={style.iconStyle} name="lock" />
+          <TextInput
+            style={style.textInputStyle}
+            value={password}
+            placeholder="*****"
+            onChangeText={changePassword}
+            secureTextEntry
+          />
+        </View>
       </View>
-      <View style={{...style.row, ...style.borderRed}}>
-        <Icon style={style.iconStyle} name="lock" />
-        <TextInput
-          value={password}
-          placeholder="*****"
-          onChangeText={changePassword}
-          secureTextEntry
-        />
-      </View>
-      <Icon.Button
-        name="sign-in"
-        onPress={loginUser}
-        style={style.buttonCenterContent}>
+      <Icon.Button name="sign-in" onPress={loginUser} style={style.buttonStyle}>
         <Text style={style.buttonText}>Prijavi se</Text>
       </Icon.Button>
-    </View>
+    </KeyboardAvoidingView>
   );
 };
 
