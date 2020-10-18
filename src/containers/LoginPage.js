@@ -1,15 +1,8 @@
 import React, {useState} from 'react';
-import {
-  View,
-  Text,
-  TextInput,
-  Image,
-  Button,
-  ImageComponent,
-} from 'react-native';
+import {View, Text, TextInput, Image} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import style from '../styles/LoginPageStyle.js';
-import login from '../api/LoginAPI'
+import LoginAPI from '../api/LoginAPI';
 
 const LoginPage = ({navigation}) => {
   const [username, setUsername] = useState('');
@@ -17,13 +10,12 @@ const LoginPage = ({navigation}) => {
 
   const changeUsername = (value) => setUsername(value);
   const changePassword = (value) => setPassword(value);
-  
 
   const loginUser = () => {
-    let data = {username: '', password: password}
+    let data = {username: '', password: password};
     console.log('data from data: ' + data);
     //TODO: call LoginService nad process username  & password
-    login(data)
+    LoginAPI.login(data);
     navigation.navigate('Home');
   };
 

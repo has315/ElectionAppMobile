@@ -2,7 +2,7 @@ import axios from 'axios';
 import StatusCodes from 'http-status-codes';
 import Config from 'react-native-config';
 // import {method} from '../utils/method';
-import hashValue from '../services/loginService'
+import LoginService from '../services/LoginService';
 
 const method = {
   POST: 'POST',
@@ -39,7 +39,7 @@ async function sendRequst(m, endpoint, data, config) {
 
 const login = async (data, config) => {
   let token = 'token';
-  const hashedValue = hashValue(data);
+  const hashedValue = LoginService.hashValue(data);
   console.log('Val is: ', hashedValue);
   const endpoint = `${Config.BASE_URL}/users/login`;
   let response = await sendRequst(method.POST, endpoint, hashedValue, config);
@@ -50,21 +50,19 @@ const login = async (data, config) => {
   }
 };
 
-let data = {
-  username: 'admin',
-  password:
-    '8zqYwcHyLp3KOyZAfxKDA7R4q9fKjjjEL2x/eBdVyoFo7GYHvVmJexBmlDFwzx+JxLQ2dzS+Ds+DxT7axEoUi+VahxVso1aeeDkZtfUN40MrP1tTdZY/qbde+dj40ammOfmZXQjkEe/6C++Ye1jTJhmQcABUV23vjiLIQ4NQ4qLPLtreWwo5hqmbLRMc1HrTwoA8FnMsn1OKw04PCL3mS2Bn+pHQO7eL4nnkRtN/M6CtL66RE1eSalTasIlnAoAc/Bbnbg/sAUqzSrfuENyvk9WGFh4zX+oaHblu5YD8bTL8Zp1ZaFCNuJxhzuyJQ/WsFJhGRmJqPLWwBcb0pqU/oH7Qg==',
-};
-let config = {};
-let endpoint = 'http://157.230.105.18:3000/users/login';
+// let data = {
+//   username: 'admin',
+//   password:
+//     '8zqYwcHyLp3KOyZAfxKDA7R4q9fKjjjEL2x/eBdVyoFo7GYHvVmJexBmlDFwzx+JxLQ2dzS+Ds+DxT7axEoUi+VahxVso1aeeDkZtfUN40MrP1tTdZY/qbde+dj40ammOfmZXQjkEe/6C++Ye1jTJhmQcABUV23vjiLIQ4NQ4qLPLtreWwo5hqmbLRMc1HrTwoA8FnMsn1OKw04PCL3mS2Bn+pHQO7eL4nnkRtN/M6CtL66RE1eSalTasIlnAoAc/Bbnbg/sAUqzSrfuENyvk9WGFh4zX+oaHblu5YD8bTL8Zp1ZaFCNuJxhzuyJQ/WsFJhGRmJqPLWwBcb0pqU/oH7Qg==',
+// };
+// let config = {};
+// let endpoint = 'http://157.230.105.18:3000/users/login';
 
-login(data, config).then((response) =>
-  console.log(`Response: ${JSON.stringify(response)}`),
-);
-
-
+// login(data, config).then((response) =>
+//   console.log(`Response: ${JSON.stringify(response)}`),
+// );
 
 // response = logout(method.POST, endpoint, data, config);
 // console.log(`Response: ${response}`);
 
-export default login;
+export default {login};
