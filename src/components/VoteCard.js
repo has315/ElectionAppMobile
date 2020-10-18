@@ -4,21 +4,19 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import style from '../styles/VoteCardStyle';
 import colors from '../styles/BaseStyle';
 import VotesAPI from '../api/VotesAPI';
-import {user} from '../utils/data';
+import DataUtils from '../utils/data';
 
 const PADDING = 4;
 const VoteCard = ({vote}) => {
-  const [status, setStatus] = useState(vote.status);
+  const [status, setStatus] = useState(vote.status === 1);
   const toggleStatus = () => {
-    let config = {headers: {authorization: user.token}};
+    let config = {headers: {authorization: DataUtils.user.token}};
     let data = {
       status: !status,
       vote_id: vote.vote_id,
     };
-    console.log(`Vote: ${JSON.stringify(vote)}`);
-    console.log(`Data: ${JSON.stringify(data)}`);
+
     VotesAPI.updateStatus(data, config).then((resp) => {
-      console.log(resp);
       let response = 'response';
       let changedRows = 'changedRows';
       if (response in resp && changedRows in resp.response) {
@@ -47,7 +45,7 @@ const VoteCard = ({vote}) => {
       <View style={{padding: PADDING, ...style.row}}>
         <Text style={style.statusText}>Izašao&nbsp;</Text>
         <Switch
-          trackColor={status ? colors.secondary : '#767577'}
+          trackColor={{true: colors.secondary, false: '#767577'}}
           thumbColor={status ? colors.accent : '#F4F3F4'}
           ios_backgroundColor={'#3E3E3E'}
           onValueChange={toggleStatus}
