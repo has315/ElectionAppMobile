@@ -8,7 +8,11 @@ const Stack = createStackNavigator();
 const Navigator = () => {
   return (
     <Stack.Navigator initialRouteName="Login">
-      <Stack.Screen name="Login" component={LoginPage} />
+      <Stack.Screen
+        name="Login"
+        component={LoginPage}
+        options={{title: 'SPS Glasovi'}}
+      />
       <Stack.Screen
         name="Home"
         component={HomePage}
