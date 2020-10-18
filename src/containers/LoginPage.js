@@ -1,12 +1,5 @@
 import React, {useState} from 'react';
-import {
-  KeyboardAvoidingView,
-  View,
-  Platform,
-  Text,
-  TextInput,
-  Image,
-} from 'react-native';
+import {View, Text, TextInput, Image} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import style from '../styles/LoginPageStyle.js';
 import LoginAPI from '../api/LoginAPI';
@@ -27,11 +20,7 @@ const LoginPage = ({navigation}) => {
   };
 
   return (
-    <KeyboardAvoidingView
-      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-      keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : 20}
-      enabled={Platform.OS === 'ios'}
-      style={style.container}>
+    <View style={style.container}>
       <View style={style.imageContainer}>
         <Image
           style={style.imageStyle}
@@ -62,7 +51,7 @@ const LoginPage = ({navigation}) => {
       <Icon.Button name="sign-in" onPress={loginUser} style={style.buttonStyle}>
         <Text style={style.buttonText}>Prijavi se</Text>
       </Icon.Button>
-    </KeyboardAvoidingView>
+    </View>
   );
 };
 
