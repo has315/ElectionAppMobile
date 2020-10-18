@@ -4,13 +4,13 @@ import style from '../styles/HomePageStyle';
 import SearchBar from '../components/SearchBar';
 import VotesContainer from '../containers/VotesContainer';
 import VotesContext from '../context/VotesContext';
-import data from '../utils/data';
+import DataUtils from '../utils/data';
 
 const HomePage = ({navigation}) => {
   const [votes, setVotes] = useState([]);
 
   useEffect(() => {
-    setVotes(data);
+    setVotes(DataUtils.data);
   }, []);
 
   return (

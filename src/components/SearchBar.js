@@ -2,16 +2,11 @@ import React, {useContext, useState} from 'react';
 import {View, TextInput} from 'react-native';
 import VotesContext from '../context/VotesContext';
 import Icon from 'react-native-vector-icons/FontAwesome';
-
+import DataUtils from '../utils/data';
 import style from '../styles/SearchBarStyle';
 import VotesAPI from '../api/VotesAPI';
 
 const PADDING = 10;
-const user = {
-  id: 1,
-  token:
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImFkbWluIiwiY2l0eSI6bnVsbCwidm90ZV91bml0IjpudWxsLCJ2b3RpbmdfYm94IjpudWxsLCJhY2NvdW50X2xldmVsIjowLCJqdGkiOiIySklKQ01WZ0RPIiwiaWF0IjoxNjAyNzA0MzMxfQ.exAAGJfkQUmRjiLhifC45BURlrolPJy1hJvJQ9-eQZI',
-};
 const searchKeys = {
   full_name: 'Ime i Prezime',
   first_name: 'Ime',
@@ -26,9 +21,9 @@ const SearchBar = () => {
 
   const search = () => {
     let config = {
-      headers: {authorization: user.token},
+      headers: {authorization: DataUtils.user.token},
       params: {
-        id: user.id,
+        id: DataUtils.user.id,
         key: selectedKey,
         value: searchPhrase.trim(),
         start: 0,
