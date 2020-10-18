@@ -20,6 +20,7 @@ const style = StyleSheet.create({
 
   searchIcon: {
     color: colors.secondary,
+    fontSize: 20,
   },
 
   centerContent: {

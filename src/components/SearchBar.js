@@ -42,7 +42,7 @@ const SearchBar = () => {
   return (
     <View style={style.container}>
       <View style={{padding: PADDING, ...style.centerContent}}>
-        <Icon style={style.searchIcon} name="search" size={20} />
+        <Icon style={style.searchIcon} name="search" />
         {/* <Picker
           prompt="Filter"
           selectedValue={selectedKey}
