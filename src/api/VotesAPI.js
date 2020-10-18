@@ -58,6 +58,16 @@ const searchVotes = async (data, config) => {
   }
 };
 
+const updateStatus = async (data, config) => {
+  const endpoint = `${Config.BASE_URL}/voters/status/update`;
+  let response = await sendRequst(method.PATCH, endpoint, data, config);
+  if (response && StatusCodes.OK === response.status) {
+    return response.data;
+  } else {
+    return [];
+  }
+};
+
 // let token =
 //   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImFkbWluIiwiY2l0eSI6bnVsbCwidm90ZV91bml0IjpudWxsLCJ2b3RpbmdfYm94IjpudWxsLCJhY2NvdW50X2xldmVsIjowLCJqdGkiOiIySklKQ01WZ0RPIiwiaWF0IjoxNjAyNzA0MzMxfQ.exAAGJfkQUmRjiLhifC45BURlrolPJy1hJvJQ9-eQZI';
 // let config = {
@@ -79,4 +89,5 @@ const searchVotes = async (data, config) => {
 export default {
   getVotes,
   searchVotes,
+  updateStatus,
 };
