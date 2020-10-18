@@ -39,7 +39,7 @@ async function sendRequst(m, endpoint, data, config) {
 
 const getVotes = async (data, config) => {
   const endpoint = `${Config.BASE_URL}/voters/all`;
-  let response = await sendRequst(endpoint, data, config);
+  let response = await sendRequst(method.GET, endpoint, data, config);
 
   if (response && StatusCodes.OK === response.status) {
     return response.data;
