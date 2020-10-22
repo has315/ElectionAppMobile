@@ -12,7 +12,7 @@ const LoginPage = ({navigation}) => {
   const [isDisabledButton, setIsDisabledButton] = useState(false);
 
   useEffect(() => {
-    LoginService.resetCredentials;
+    LoginService.resetCredentials();
     console.log('Credentials reset done');
   }, []);
 
