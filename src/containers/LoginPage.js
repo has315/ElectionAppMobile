@@ -6,8 +6,8 @@ import LoginAPI from '../api/LoginAPI';
 import LoginService from '../services/LoginService';
 
 const LoginPage = ({navigation}) => {
-  const [username, setUsername] = useState('admin');
-  const [password, setPassword] = useState('adminqq');
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
   const [isEditable, setIsEditable] = useState(true);
   const [isDisabledButton, setIsDisabledButton] = useState(false);
 
