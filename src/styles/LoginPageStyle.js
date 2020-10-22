@@ -60,6 +60,12 @@ const style = StyleSheet.create({
     alignItems: 'center',
   },
 
+  disabledButtonStyle: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#94A3DF',
+  },
+
   borderRed: {
     borderWidth: 3,
     borderColor: 'red',

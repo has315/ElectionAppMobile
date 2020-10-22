@@ -3,6 +3,7 @@ import StatusCodes from 'http-status-codes';
 import Config from 'react-native-config';
 // import {method} from '../utils/method';
 import LoginService from '../services/LoginService';
+import Keychain from 'react-native-keychain';
 
 const method = {
   POST: 'POST',
@@ -39,14 +40,27 @@ async function sendRequst(m, endpoint, data, config) {
 
 const login = async (data, config) => {
   let token = 'token';
-  const hashedValue = LoginService.hashValue(data);
-  console.log('Val is: ', hashedValue);
+  let response = 'response';
+  let account_level = 'account_level';
+
+  data.password = await LoginService.hashValue(data);
+  console.log(`Req data: ${JSON.stringify(data)}`);
   const endpoint = `${Config.BASE_URL}/users/login`;
-  let response = await sendRequst(method.POST, endpoint, hashedValue, config);
-  if (response && StatusCodes.OK === response.status && token in response) {
-    return response.token;
+  let result = await sendRequst(method.POST, endpoint, data, config);
+
+  console.log(`result LoginAPI: ${JSON.stringify(result)}`);
+  if (token in result && response in result && account_level in result) {
+    console.log('Loggin succesfull');
+    let creds = {
+      user_id: result.response,
+      username: data.username,
+      token: result.token,
+      account_level: response.account_level,
+    };
+    await LoginService.storeCredentials(creds);
+    return true;
   } else {
-    return null;
+    return false;
   }
 };
 

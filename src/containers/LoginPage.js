@@ -1,22 +1,66 @@
-import React, {useState} from 'react';
-import {View, Text, TextInput, Image} from 'react-native';
+import React, {useState, useEffect} from 'react';
+import {View, Text, TextInput, Image, Alert} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import style from '../styles/LoginPageStyle.js';
 import LoginAPI from '../api/LoginAPI';
+import LoginService from '../services/LoginService';
 
 const LoginPage = ({navigation}) => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState('admin');
+  const [password, setPassword] = useState('adminqq');
+  const [isEditable, setIsEditable] = useState(true);
+  const [isDisabledButton, setIsDisabledButton] = useState(false);
 
-  const changeUsername = (value) => setUsername(value);
-  const changePassword = (value) => setPassword(value);
+  useEffect(() => {
+    LoginService.resetCredentials;
+    console.log('Credentials reset done');
+  }, []);
 
-  const loginUser = () => {
-    let data = {username: '', password: password};
-    console.log('data from data: ' + data);
-    //TODO: call LoginService nad process username  & password
-    LoginAPI.login(data);
-    navigation.navigate('Home');
+  const isEmpty = (value) => setIsDisabledButton(value.length === 0);
+  const changeUsername = (value) => {
+    setUsername(value);
+    isEmpty(value);
+  };
+  const changePassword = (value) => {
+    setPassword(value);
+    isEmpty(value);
+  };
+
+  const showAlert = (title, message) => {
+    Alert.alert(
+      title,
+      message,
+      [
+        {
+          text: 'OK',
+          onPress: () => {
+            setIsDisabledButton(false);
+            setIsEditable(true);
+          },
+        },
+      ],
+      {
+        cancelable: false,
+      },
+    );
+  };
+
+  const loginUser = async () => {
+    setIsDisabledButton(true);
+    setIsEditable(false);
+    let data = {username, password};
+    let response = await LoginAPI.login(data);
+    if (response) {
+      const creds = await LoginService.getCredentials();
+      console.log(`Credentials: ${JSON.stringify(creds)}`);
+      setIsDisabledButton(false);
+      setIsEditable(true);
+      navigation.navigate('Home');
+    } else {
+      setUsername('');
+      setPassword('');
+      showAlert('Greška', 'Pogrešan nalog/lozinka.');
+    }
   };
 
   return (
@@ -35,6 +79,7 @@ const LoginPage = ({navigation}) => {
             value={username}
             placeholder="Korisičko ime"
             onChangeText={changeUsername}
+            editable={isEditable}
           />
         </View>
         <View style={{...style.row}}>
@@ -44,11 +89,16 @@ const LoginPage = ({navigation}) => {
             value={password}
             placeholder="*****"
             onChangeText={changePassword}
+            editable={isEditable}
             secureTextEntry
           />
         </View>
       </View>
-      <Icon.Button name="sign-in" onPress={loginUser} style={style.buttonStyle}>
+      <Icon.Button
+        name="sign-in"
+        onPress={loginUser}
+        style={isDisabledButton ? style.disabledButtonStyle : style.buttonStyle}
+        disabled={isDisabledButton}>
         <Text style={style.buttonText}>Prijavi se</Text>
       </Icon.Button>
     </View>

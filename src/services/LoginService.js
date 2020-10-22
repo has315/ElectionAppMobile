@@ -1,10 +1,30 @@
-// import {pbkdf2Sync} from "pbkdf2"
+import PBKDF2 from 'react-native-pbkdf2';
+import Config from 'react-native-config';
+import Keychain from 'react-native-keychain';
 
-// const hashValue = async (value, salt) => {
-//    const hashedValue =  await pbkdf2Sync(value, salt, 4000, 256, "sha1");
-//    return hashedValue
-// }
+const storeCredentials = async (data) => {
+  console.log('Storing data');
+  await Keychain.setGenericPassword(data.username, JSON.stringify(data));
+  console.log('Data stored');
+};
 
-const hashValue = async (value, salt) => {};
+const getCredentials = async () => {
+  return await Keychain.getGenericPassword();
+};
 
-export default hashValue;
+const resetCredentials = async () => {
+  return await Keychain.resetGenericPassword();
+};
+
+const hashValue = async (data, saltRounds = 4000) => {
+  const salt = `${data.username}${Config.PRESALT}`;
+  const value = await PBKDF2.derivationKey(
+    data.password,
+    salt,
+    saltRounds,
+    +Config.HASH_LENGTH,
+  );
+  return value;
+};
+
+export default {hashValue, storeCredentials, getCredentials, resetCredentials};
