@@ -12,8 +12,8 @@ const style = StyleSheet.create({
 
   imageContainer: {
     flexDirection: 'row',
-    marginTop: 40,
-    marginBottom: 50,
+    marginTop: 20,
+    marginBottom: 10,
     padding: 10,
   },
 
