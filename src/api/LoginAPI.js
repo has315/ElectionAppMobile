@@ -1,9 +1,7 @@
 import axios from 'axios';
-import StatusCodes from 'http-status-codes';
 import Config from 'react-native-config';
 // import {method} from '../utils/method';
 import LoginService from '../services/LoginService';
-import Keychain from 'react-native-keychain';
 
 const method = {
   POST: 'POST',
@@ -52,7 +50,7 @@ const login = async (data, config) => {
   if (token in result && response in result && account_level in result) {
     console.log('Loggin succesfull');
     let creds = {
-      user_id: result.response,
+      id: result.response,
       username: data.username,
       token: result.token,
       account_level: response.account_level,
