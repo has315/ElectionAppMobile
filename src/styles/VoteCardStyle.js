@@ -41,6 +41,20 @@ const style = StyleSheet.create({
   },
 
   row: {flexDirection: 'row'},
+
+  leftContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    // backgroundColor: 'green',
+  },
+  rightContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    // backgroundColor: 'red',
+  },
 });
 
 export default style;

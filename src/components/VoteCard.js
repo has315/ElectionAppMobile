@@ -39,8 +39,14 @@ const VoteCard = ({vote}) => {
         </Text>
       </View>
       <View style={{padding: PADDING, ...style.row}}>
-        <Icon style={style.iconStyle} name="birthday-cake" />
-        <Text style={style.textColor}>{vote.birth_date}</Text>
+        <View style={style.leftContainer}>
+          <Icon style={style.iconStyle} name="birthday-cake" />
+          <Text style={style.textColor}>{vote.birth_date}</Text>
+        </View>
+        <View style={style.rightContainer}>
+          <Icon style={style.iconStyle} name="archive" />
+          <Text style={style.textColor}>{vote.voting_box}</Text>
+        </View>
       </View>
       <View style={{padding: PADDING, ...style.row}}>
         <Text style={style.statusText}>Izašao&nbsp;</Text>
