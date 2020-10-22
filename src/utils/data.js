@@ -1,9 +1,3 @@
-const user = {
-  id: 1,
-  token:
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImFkbWluIiwiY2l0eSI6bnVsbCwidm90ZV91bml0IjpudWxsLCJ2b3RpbmdfYm94IjpudWxsLCJhY2NvdW50X2xldmVsIjowLCJqdGkiOiIySklKQ01WZ0RPIiwiaWF0IjoxNjAyNzA0MzMxfQ.exAAGJfkQUmRjiLhifC45BURlrolPJy1hJvJQ9-eQZI',
-};
-
 const data = [
   {
     vote_id: 1,
@@ -22007,4 +22001,4 @@ const data = [
   },
 ];
 
-export default {user,data};
+export default {data};
