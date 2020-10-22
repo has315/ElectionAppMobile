@@ -1,8 +1,7 @@
 import React, {useContext, useState} from 'react';
 import {View, TextInput} from 'react-native';
-import VotesContext from '../context/VotesContext';
+import DataContext from '../context/DataContext';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import DataUtils from '../utils/data';
 import style from '../styles/SearchBarStyle';
 import VotesAPI from '../api/VotesAPI';
 
@@ -15,28 +14,40 @@ const searchKeys = {
 };
 
 const SearchBar = () => {
-  const {setVotes} = useContext(VotesContext);
+  const {votes, setVotes, user} = useContext(DataContext);
   const [searchPhrase, setSearchPhrase] = useState('');
   const [selectedKey, setSelectedKey] = useState(Object.keys(searchKeys)[0]);
 
-  const search = () => {
+  const formatVote = (vote) => {
+    // YYYY-MM-DD
+    let date = vote.birth_date.split('T')[0];
+    let vars = date.split('-');
+    // DD.MM.YYYY.
+    vote.birth_date = `${vars[2]}.${vars[1]}.${vars[0]}.`;
+    return vote;
+  };
+
+  const search = async () => {
     let config = {
-      headers: {authorization: DataUtils.user.token},
+      headers: {authorization: user.token},
       params: {
-        id: DataUtils.user.id,
+        id: user.id,
         key: selectedKey,
         value: searchPhrase.trim(),
         start: 0,
         direction: 'next',
       },
     };
-
+    let oldVotes = votes;
+    setVotes([]);
     VotesAPI.searchVotes({}, config)
       .then((data) => {
-        console.log(data.response.length);
-        setVotes(data.response);
+        setVotes(data.response.map((v) => formatVote(v)));
       })
-      .catch((err) => console.error(err));
+      .catch((err) => {
+        console.error(err);
+        setVotes(oldVotes);
+      });
   };
 
   return (
