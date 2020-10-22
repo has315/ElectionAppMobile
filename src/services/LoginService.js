@@ -12,6 +12,13 @@ const getCredentials = async () => {
   return await Keychain.getGenericPassword();
 };
 
+const getLoggedUser = async () => {
+  let creds = await getCredentials();
+  let username = creds.username;
+  let data = JSON.parse(creds.password);
+  return {username, ...data};
+};
+
 const resetCredentials = async () => {
   return await Keychain.resetGenericPassword();
 };
@@ -27,4 +34,10 @@ const hashValue = async (data, saltRounds = 4000) => {
   return value;
 };
 
-export default {hashValue, storeCredentials, getCredentials, resetCredentials};
+export default {
+  hashValue,
+  getCredentials,
+  getLoggedUser,
+  resetCredentials,
+  storeCredentials,
+};
