@@ -5,29 +5,34 @@ import style from '../styles/VoteCardStyle';
 import colors from '../styles/BaseStyle';
 import VotesAPI from '../api/VotesAPI';
 import DataUtils from '../utils/data';
+import LoginService from '../services/LoginService';
+
 
 const PADDING = 4;
-const VoteCard = ({vote}) => {
+const VoteCard =  ({vote}) => {
   const [status, setStatus] = useState(vote.status === 1);
   const toggleStatus = () => {
-    let config = {headers: {authorization: DataUtils.user.token}};
-    let data = {
-      status: !status,
-      vote_id: vote.vote_id,
-    };
-
-    VotesAPI.updateStatus(data, config).then((resp) => {
+    LoginService.getLoggedUser().then((data) => {
+      // console.log(JSON.stringify(creds));
+     let config = {headers: {authorization: data.token}};
+     VotesAPI.updateStatus(data, config).then((resp) => {
       let response = 'response';
       let changedRows = 'changedRows';
+      console.log(resp);
       if (response in resp && changedRows in resp.response) {
         if (resp.response[changedRows] === 1) {
           setStatus(!status);
           vote.status = status ? 1 : 0;
         }
       } else {
-        console.error(resp.error);
+        console.error(resp);
       }
     });
+    });
+    // let data = {
+    //   status: !status,
+    //   vote_id: vote.vote_id,
+    // };
   };
 
   return (
