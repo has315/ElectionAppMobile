@@ -15,19 +15,19 @@ const VoteCard =  ({vote}) => {
     LoginService.getLoggedUser().then((data) => {
       // console.log(JSON.stringify(creds));
      let config = {headers: {authorization: data.token}};
-     VotesAPI.updateStatus(data, config).then((resp) => {
-      let response = 'response';
-      let changedRows = 'changedRows';
-      console.log(resp);
-      if (response in resp && changedRows in resp.response) {
-        if (resp.response[changedRows] === 1) {
-          setStatus(!status);
-          vote.status = status ? 1 : 0;
+      VotesAPI.updateStatus(data, config).then((resp) => {
+        let response = 'response';
+        let changedRows = 'changedRows';
+        console.log(resp);
+        if (response in resp && changedRows in resp.response) {
+          if (resp.response[changedRows] === 1) {
+            setStatus(!status);
+            vote.status = status ? 1 : 0;
+          }
+        } else {
+          console.error(resp);
         }
-      } else {
-        console.error(resp);
-      }
-    });
+      });
     });
     // let data = {
     //   status: !status,
