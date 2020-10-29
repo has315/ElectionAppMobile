@@ -1,21 +1,22 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import {View, Text, Switch} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import style from '../styles/VoteCardStyle';
 import colors from '../styles/BaseStyle';
 import VotesAPI from '../api/VotesAPI';
 import DataUtils from '../utils/data';
-import LoginService from '../services/LoginService';
-
+import DataContext from '../context/DataContext'
 
 const PADDING = 4;
 const VoteCard =  ({vote}) => {
+  const {user} = useContext(DataContext);
   const [status, setStatus] = useState(vote.status === 1);
   const toggleStatus = () => {
-    LoginService.getLoggedUser().then((data) => {
       // console.log(JSON.stringify(creds));
-     let config = {headers: {authorization: data.token}};
-      VotesAPI.updateStatus(data, config).then((resp) => {
+      console.log(user.token);
+     let config = {headers: {authorization: user.token}};
+      console.log(vote)
+      VotesAPI.updateStatus(vote, config).then((resp) => {
         let response = 'response';
         let changedRows = 'changedRows';
         console.log(resp);
@@ -23,12 +24,12 @@ const VoteCard =  ({vote}) => {
           if (resp.response[changedRows] === 1) {
             setStatus(!status);
             vote.status = status ? 1 : 0;
+
           }
         } else {
           console.error(resp);
         }
       });
-    });
     // let data = {
     //   status: !status,
     //   vote_id: vote.vote_id,
