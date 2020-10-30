@@ -12,28 +12,24 @@ const VoteCard =  ({vote}) => {
   const {user} = useContext(DataContext);
   const [status, setStatus] = useState(vote.status === 1);
   const toggleStatus = () => {
-      // console.log(JSON.stringify(creds));
-      console.log(user.token);
-     let config = {headers: {authorization: user.token}};
-      console.log(vote)
-      VotesAPI.updateStatus(vote, config).then((resp) => {
+      let data = {
+        status: !status,
+        vote_id: vote.vote_id,
+    };
+      let config = {headers: {authorization: user.token}};
+      VotesAPI.updateStatus(data, config).then((resp) => {
         let response = 'response';
         let changedRows = 'changedRows';
         console.log(resp);
         if (response in resp && changedRows in resp.response) {
           if (resp.response[changedRows] === 1) {
             setStatus(!status);
-            vote.status = status ? 1 : 0;
-
           }
         } else {
           console.error(resp);
         }
       });
-    // let data = {
-    //   status: !status,
-    //   vote_id: vote.vote_id,
-    // };
+
   };
 
   return (
