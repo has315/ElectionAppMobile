@@ -207,7 +207,7 @@ dependencies {
     } else {
         implementation jscFlavor
     }
-      compile project(':react-native-pbkdf2')
+      api project(':react-native-pbkdf2')
 
 }
 
